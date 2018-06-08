@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|Roboto+Slab');
+@import "../../node_modules/angular-calendar/css/angular-calendar.css";
+
+h1 {
+  font-family: Roboto, serif;
+  font-size: 28pt;
+}
+
+.button {
+  bottom: 0;
+}
+mat-drawer {
+  width: 150px;
+  height: 100%;
+  margin-right: 20px;
+  padding-top: 50px;
+  padding-left: 30px;
+}
+mat-drawer a {
+  text-decoration: none;
+  color: #000;
+}
+
+mat-drawer-content {
+  width: 1460px;
+  height: 100%;
+  margin-left: 20px;
+}

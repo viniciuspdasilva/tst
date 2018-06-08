@@ -1,0 +1,43 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="example-container">
+  <form [formGroup]="notasForm" class="example-container">
+    <mat-horizontal-stepper [linear]="true">
+      <mat-step>
+        <ng-template matStepLabel>Dados Iniciais</ng-template>
+        <mat-form-field>
+          <input type="number" matInput placeholder="Numero" formControlName="numNF">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" formControlName="dtEmicaoNF" placeholder="Emissão">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="rec" formControlName="dtRecNF" placeholder="Recebimento">
+          <mat-datepicker-toggle matSuffix [for]="rec"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #rec></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="anoRef" placeholder="Ano(Referência)">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="mesRef" placeholder="Mês(Refência)">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" matInput formControlName="tipoDesp" placeholder="Despesa">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="vlrItem" placeholder="Valor">
+        </mat-form-field>
+        <mat-form-field>
+          <textarea  matInput placeholder="Observações gerais" formControlName="obsNF"></textarea>
+        </mat-form-field>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Consultar e Salvar</ng-template>
+        <button mat-raised-button (click)="cadastrarNotas()" color="primary">Enviar</button>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+  </form>
+</div>

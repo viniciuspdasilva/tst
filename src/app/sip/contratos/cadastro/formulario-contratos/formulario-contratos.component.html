@@ -1,0 +1,414 @@
+<p-growl [(value)]="msg"></p-growl>
+<div class="example-container">
+  <form [formGroup]="contratosForm" class="example-container">
+    <mat-horizontal-stepper [linear]="true" #cadastro>
+      <mat-step [stepControl]="contratosForm">
+        <ng-template matStepLabel><strong>Dados Cadastrais</strong></ng-template>
+        <div class="first-mat-form">
+          <mat-form-field>
+            <input type="text" matInput placeholder="Contrato" formControlName="nrContrato">
+            <mat-hint *ngIf="!contratosForm.get('nrContrato').hasError('required')">
+              <mat-icon>info</mat-icon> - Não se esqueça de digitar no seguinte padrão!
+            </mat-hint>
+            <mat-error *ngIf="contratosForm.get('nrContrato').touched && contratosForm.get('nrContrato').hasError('required')">
+              <mat-icon>error</mat-icon> - Não se esqueça de digitar o contrato!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select type="text" placeholder="Numero do contrato" formControlName="tipoContrato">
+              <mat-option>---</mat-option>
+              <mat-option value="1">Aquisição</mat-option>
+              <mat-option value="2">Serviço</mat-option>
+              <mat-option value="3">Manutenção</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="!contratosForm.get('tipoContrato').hasError('required')">
+              <mat-icon>info</mat-icon> - Qual o tipo do contrato mesmo?
+            </mat-hint>
+            <mat-error *ngIf="contratosForm.get('tipoContrato').untouched && contratosForm.get('tipoContrato').hasError('required')">
+              <mat-icon>error</mat-icon> - Acho que o senhor(a) esqueceu de adicionar o tipo de contrato!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select type="text" placeholder="Manutenção" formControlName="tipoManut">
+              <mat-option>---</mat-option>
+              <mat-option value="1">Intervenção</mat-option>
+              <mat-option value="2">Mensal</mat-option>
+              <mat-option value="3">Padrão</mat-option>
+              <mat-option value="4">Pregão</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="!contratosForm.get('tipoManut').hasError('required')">
+              <mat-icon>info</mat-icon> - Qual o tipo de manutenção adotada no contrato?
+            </mat-hint>
+            <mat-error *ngIf="contratosForm.get('tipoManut').touched && contratosForm.get('tipoManut').hasError('required')">
+              <mat-icon>error</mat-icon> - Lembre-se esse campo pode ser util em uma futura pesquisa!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="assinatura" placeholder="Assinatura" formControlName="dtAssContrato">
+            <mat-datepicker-toggle matSuffix [for]="assinatura">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #assinatura></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="inicio" placeholder="Inicio" formControlName="dtInitContrato">
+            <mat-datepicker-toggle matSuffix [for]="inicio">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #inicio></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput [matDatepicker]="termino" placeholder="Termino" formControlName="dtFinContrato">
+            <mat-datepicker-toggle matSuffix [for]="termino">
+              <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #termino></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Contrato" formControlName="drcContrato">
+            <mat-hint *ngIf="!contratosForm.get('drcContrato').hasError('required')">
+              <mat-icon>info</mat-icon> - É importante saber quanto tempo esse contrato valerá, não acha?
+            </mat-hint>
+            <mat-error *ngIf="contratosForm.get('drcContrato').touched && contratosForm.get('drcContrato').hasError('required')">
+              <mat-icon>error</mat-icon> - Vamos lá, essa informação ajudará o senhor ou um colega de trabalho!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <span matPrefix>
+              <mat-icon>attach_money</mat-icon>
+            </span>
+            <input type="number" matInput placeholder="Valor" formControlName="vlrContrato">
+            <mat-hint *ngIf="!contratosForm.get('vlrContrato').hasError('required')">
+              <mat-icon>info</mat-icon> - Não se esqueça de digitar no seguinte padrão!
+            </mat-hint>
+            <mat-error *ngIf="contratosForm.get('vlrContrato').touched && contratosForm.get('nrContrato').hasError('required')">
+              <mat-icon>error</mat-icon> - Não se esqueça de digitar o contrato!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Observações Relevantes" formControlName="obsContrato">
+            <mat-hint *ngIf="!contratosForm.get('nrContrato').hasError('required')">
+              <mat-icon>info</mat-icon> - Não se esqueça de digitar no seguinte padrão!
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div *ngIf="contratosForm.valid">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step *ngIf="externos.length != 0">
+        <ng-template matStepLabel><strong>Atendimentos Externos</strong></ng-template>
+        <table mat-table [dataSource]="dataSourceExternos">
+          <ng-container matColumnDef="idSS">
+            <th mat-header-cell *matHeaderCellDef> Ordem de serviço </th>
+            <td mat-cell *matCellDef="let res"> {{res.idSS.numeroOs}} </td>
+          </ng-container>
+          <ng-container matColumnDef="nomeFornecedor">
+            <th mat-header-cell *matHeaderCellDef> Atendente </th>
+            <td mat-cell *matCellDef="let res"> {{res.nomeAtendente}} </td>
+          </ng-container>
+          <ng-container matColumnDef="nrChamado">
+            <th mat-header-cell *matHeaderCellDef>Chamado Externo </th>
+            <td mat-cell *matCellDef="let res"> {{res.nrChamado}} </td>
+          </ng-container>
+          <ng-container matColumnDef="nomeAtendente">
+            <th mat-header-cell *matHeaderCellDef> Sigla </th>
+            <td mat-cell *matCellDef="let res"> {{res.nomeAtendente}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsAtendimentos"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columnsAtendimentos" (click)="selectRow(row, 0)"></tr>
+        </table>
+        <div *ngIf="externosData.length !== 0">
+          <h3>Atendimentos Externos</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let empresa of externosData">
+              <h3 matLine>{{empresa.nrChamado}}</h3>
+              <p matLine>
+                <span>{{empresa.nomeAtendente}} - {{empresa.idSS.numeroOs}}</span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Equipamentos</strong></ng-template>
+        <table mat-table [dataSource]="dataSourceEquipamentos">
+          <ng-container matColumnDef="selection">
+            <th mat-header-cell *matHeaderCellDef><mat-checkbox></mat-checkbox></th>
+            <td mat-cell *matCellDef="let res"><mat-checkbox (click)="selectRow(res, 1)"></mat-checkbox></td>
+          </ng-container>
+          <ng-container matColumnDef="patrimonio">
+            <th mat-header-cell *matHeaderCellDef> Patrimonio </th>
+            <td mat-cell *matCellDef="let res"> {{res.numTombamento}} </td>
+          </ng-container>
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let res"> {{res.nomeEquip}} </td>
+          </ng-container>
+          <ng-container matColumnDef="tipo">
+            <th mat-header-cell *matHeaderCellDef>Tipo </th>
+            <td mat-cell *matCellDef="let res"> {{res.codTipo.desTipoEquip}} </td>
+          </ng-container>
+          <ng-container matColumnDef="modelo">
+            <th mat-header-cell *matHeaderCellDef> Modelo </th>
+            <td mat-cell *matCellDef="let res"> {{res.codModelo.infoModelo}} </td>
+          </ng-container>
+          <ng-container matColumnDef="serie">
+            <th mat-header-cell *matHeaderCellDef> Serie </th>
+            <td mat-cell *matCellDef="let res"> {{res.numSerie}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsEquipamentos"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columnsEquipamentos" ></tr>
+        </table>
+        <mat-paginator #equipamentosPaginator [pageSize]="5" [length]="2204"  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <div *ngIf="equipamentos.length !== 0">
+          <h3 class="display-4">Equipamentos Escolhidos</h3>
+          <mat-list role="list" class="mat-elevation-z5">
+            <mat-list-item role="listitem" *ngFor="let equip of equipamentos">
+              <a matLine>{{ equip.codTipo.desTipoEquip }}</a>
+              <button mat-icon-button class="float-left">Remover</button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Fornecedor</strong></ng-template>
+        <table mat-table  [dataSource]="dataSourceFornecedores">
+          <ng-container matColumnDef="selection">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+             <mat-checkbox (click)="selectRow(row, 3)"></mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="cnpjEmpresa">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-form-field>
+                <input type="text" matInput placeholder="CNPJ" appMask="99.999.999/9999-99">
+              </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let res"> {{res.cnpjEmpresa}} </td>
+          </ng-container>
+          <ng-container matColumnDef="nomeEmpresa">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-form-field>
+                <input type="text" matInput placeholder="NOME">
+              </mat-form-field></th>
+            <td mat-cell *matCellDef="let res"> {{res.nomeEmpresa}} </td>
+          </ng-container>
+          <ng-container matColumnDef="telefoneEmpresa">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-form-field>
+                <input type="text" matInput placeholder="TELEFONE">
+              </mat-form-field>
+            </th>
+            <td mat-cell *matCellDef="let res"> ({{res.telefoneEmpresa.ddd}}) {{res.telefoneEmpresa.telFixo}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsFornecedores"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columnsFornecedores"></tr>
+        </table>
+        <mat-paginator #fornecedoresPaginator [length]="71111" [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]"></mat-paginator>
+        <div *ngIf="fornecedores.length !== 0">
+          <h3>Fornecedores</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let empresa of fornecedores">
+              <h3 matLine>{{empresa.cnpjEmpresa}}</h3>
+              <p matLine>
+                <span>{{empresa.cnpjEmpresa}} - {{empresa.nomeEmpresa}}</span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Garantia</strong></ng-template>
+        <table mat-table [dataSource]="dataSourceGarantia">
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef><mat-checkbox></mat-checkbox></th>
+            <td mat-cell *matCellDef="let row"><mat-checkbox (click)="selectRow(row, 4)"></mat-checkbox></td>
+          </ng-container>
+          <ng-container matColumnDef="nmSolGarantia">
+            <th mat-header-cell *matHeaderCellDef> Contato </th>
+            <td mat-cell *matCellDef="let res"> {{res.nmSolGarantia}} </td>
+          </ng-container>
+          <ng-container matColumnDef="tempoGarantia">
+            <th mat-header-cell *matHeaderCellDef>Duração</th>
+            <td mat-cell *matCellDef="let res"> {{res.tempoGarantia}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsGarantia"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columnsGarantia"></tr>
+        </table>
+        <mat-paginator #garantiasPaginator [length]="71111" [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]"></mat-paginator>
+        <div *ngIf="garantias.length !== 0">
+          <h3>Garantias Cadastradas</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let empresa of garantias">
+              <h3 matLine>{{empresa.nmSolGarantia}}</h3>
+              <p matLine>
+                <span>{{empresa.dtInitGarantia}} - {{empresa.dtFinalGarantia}}</span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Processo</strong></ng-template>
+        <table mat-table [dataSource]="dataSourceProcessos">
+          <ng-container *ngFor="let columns of columnsProcessos; let i of columnsProcessos.keys()" matColumnDef="{{columns}}">
+            <th mat-header-cell *matHeaderCellDef="">{{columns.toUpperCase()}}</th>
+            <div *ngIf="i == 'actions'; else elseButton">
+              <td mat-cell *matCellDef="let res">
+                <button mat-button color="primary" (click)="teste()"></button>
+              </td>
+            </div>
+            <ng-template #elseButton>
+
+              <td mat-cell *matCellDef="let res">{{i}} - {{res[columns]}}</td>
+            </ng-template>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsProcessos"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columnsProcessos" (click)="selectRow(row, 5)"></tr>
+        </table>
+        <mat-paginator #processosPaginator [length]="71111" [pageSize]="3" [pageSizeOptions]="[3, 5, 10, 15]"></mat-paginator>
+        <div *ngIf="processos.length !== 0">
+          <h3>Processos</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let empresa of processos">
+              <h3 matLine>{{empresa.numProcesso}}</h3>
+              <p matLine>
+                <span>{{empresa.objProcesso}}</span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Gestores</strong></ng-template>
+        <table mat-table [dataSource]="dataSourceUsuarios">
+          <ng-container *ngFor="let columns of columnsGestores let i of columnsProcessos.length" matColumnDef="{{columns}}">
+            <th mat-header-cell *matHeaderCellDef="">{{columns.toUpperCase()}}</th>
+            <div *ngIf="i == '4'; else elseButton">
+              <td mat-cell *matCellDef="let res">
+                <button mat-button color="primary" (click)="teste()"></button>
+              </td>
+            </div>
+            <ng-template #elseButton>
+              {{i}}
+              <td mat-cell *matCellDef="let res">{{res[columns]}}</td>
+            </ng-template>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsGestores"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columnsGestores" (click)="selectRow(row, 6)"></tr>
+        </table>
+        <div *ngIf="usuarios.length !== 0">
+          <h3>Gestores</h3>
+          <mat-list>
+            <mat-list-item *ngFor="let empresa of usuarios">
+              <h3 matLine>{{empresa.cpf}}</h3>
+              <p matLine>
+                <span>{{empresa.nomeUsuario}} - <a href="http://mailton:{{empresa.email}}">{{empresa.email}}</a></span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Confirmação e Cadastrar</strong></ng-template>
+        <mat-card>
+          <mat-card-header>
+            <h3 matCardTitle>Contrato: </h3>
+            <mat-card-subtitle>
+              Essas são os dados cadastrados e escolhidos no formulario anterior, se estiver tudo correto,
+              aperte em enviar
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Contratos
+                </mat-panel-title>
+                <mat-panel-description>
+                 Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Atendimentos Externos
+                </mat-panel-title>
+                <mat-panel-description>
+                  Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Equipamentos
+                </mat-panel-title>
+                <mat-panel-description>
+                  Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Fornecedores
+                </mat-panel-title>
+                <mat-panel-description>
+                  Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Garantia
+                </mat-panel-title>
+                <mat-panel-description>
+                  Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Processos
+                </mat-panel-title>
+                <mat-panel-description>
+                  Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Gestores
+                </mat-panel-title>
+                <mat-panel-description>
+                  Dados principais dos contratos
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-footer>
+              <button mat-raised-button color="primary" (click)="enviarForm()">Enviar</button>
+          </mat-card-footer>
+        </mat-card>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</div>

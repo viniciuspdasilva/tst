@@ -1,0 +1,34 @@
+<div id="fundo-externo">
+  <div id="fundo">
+    <img [src]="imgs_login.tela" alt="">
+  </div>
+</div>
+<div class="container-fluid login">
+  <div class="row">
+    <div class="col-md-12 align-content-center">
+      <div class="card text-center form-login">
+        <img class="card-img-top" style="filter: opacity(120%) contrast(120%); padding: 12px" [src]="imgs_login.logo" alt="">
+        <mat-divider></mat-divider>
+        <div class="card-body">
+          <h5 class="card-title">Login</h5>
+          <mat-divider></mat-divider>
+          <form class="example-container" (ngSubmit)="logar()" [formGroup]="loginForm">
+            <mat-form-field>
+              <input matInput type="text" placeholder="Matricula" formControlName="matricula" [required]="true" [maxlength]="8">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Senha" formControlName="password" [required]="true" [maxlength]="8">
+            </mat-form-field>
+            <button type="submit" class="btn btn-success btn-block" [disabled]="loginForm.invalid">Logar</button>
+          </form>
+        </div>
+        <div class="card-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar fixed-bottom navbar-light bg-info">
+    <a class="navbar-brand" href="#">SIP</a>
+  </nav>
+</div>

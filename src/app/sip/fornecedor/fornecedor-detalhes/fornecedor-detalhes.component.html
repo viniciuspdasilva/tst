@@ -1,0 +1,83 @@
+<mat-tab-group>
+  <mat-tab>
+    <ng-template matTabLabel>Dados principais</ng-template>
+    <pre>{{telefoneEmpresa | json}}</pre>
+    <dl class="row">
+      <dt class="col-sm-3">Nome Fantasia</dt>
+      <dd class="col-sm-9">
+        <p>{{data.nomeEmpresa}}</p>
+      </dd>
+      <dt class="col-sm-3">CNPJ</dt>
+      <dd class="col-sm-9">
+        <p>{{data.cnpjEmpresa}}</p>
+      </dd>
+      <dt class="col-sm-3">Site</dt>
+      <dd class="col-sm-9">
+        <p *ngIf="data.siteEmpresa !== ''; else notFound"><a [href]="data.siteEmpresa" target="_blank">{{data.siteEmpresa}}</a></p>
+        <ng-template #notFound><strong>Nenhum site cadastrado</strong></ng-template>
+      </dd>
+
+      <dt class="col-sm-3">Email</dt>
+      <dd class="col-sm-9">
+        <p *ngIf="data.emailEmpresa !== ''; else notFoundEmail"><a [href]="data.siteEmpresa" target="_blank">{{data.emailEmpresa}}</a></p>
+        <ng-template #notFoundEmail><strong>Nenhum email cadastrado</strong></ng-template>
+      </dd>
+
+      <dt class="col-sm-3">Observações</dt>
+      <dd class="col-sm-9">
+        <p *ngIf="data.obsEmpresa !== ''; else notFoundEmail">{{data.obsEmpresa}}</p>
+        <ng-template #notFoundEmail><strong>Nenhuma observação cadastrado!</strong></ng-template>
+      </dd>
+    </dl>
+  </mat-tab>
+  <mat-tab>
+    <ng-template matTabLabel>Telefones</ng-template>
+    <dl class="row">
+      <dt class="col-sm-3">Fixo</dt>
+      <dd class="col-sm-9">
+
+      </dd>
+      <dt class="col-sm-3">Celular</dt>
+      <dd class="col-sm-9">
+      </dd>
+      <dt class="col-sm-3">Observações</dt>
+      <dd class="col-sm-9">
+      </dd>
+    </dl>
+  </mat-tab>
+  <mat-tab>
+    <ng-template matTabLabel>Endereço</ng-template>
+    <dl class="row">
+      <dt class="col-sm-3">CEP</dt>
+      <dd class="col-sm-9">
+        <!--<p>{{data.enderecoEmpresa.cep}}</p>-->
+      </dd>
+      <dt class="col-sm-3">Rua</dt>
+      <dd class="col-sm-9">
+        <!--<p>{{data.enderecoEmpresa.nomeRua}} - {{data.enderecoEmpresa.numEnd}}</p>-->
+      </dd>
+      <dt class="col-sm-3">Quadra</dt>
+      <dd class="col-sm-9">
+        <!--<p>{{data.enderecoEmpresa.nomeQuad}}</p>-->
+      </dd>
+      <dt class="col-sm-3">Site</dt>
+      <dd class="col-sm-9">
+        <p *ngIf="data.siteEmpresa !== ''; else notFound"><a [href]="data.siteEmpresa" target="_blank">{{data.siteEmpresa}}</a></p>
+        <ng-template #notFound><strong>Nenhum site cadastrado</strong></ng-template>
+      </dd>
+
+      <dt class="col-sm-3">Email</dt>
+      <dd class="col-sm-9">
+        <p *ngIf="data.emailEmpresa !== ''; else notFoundEmail"><a [href]="data.siteEmpresa" target="_blank">{{data.emailEmpresa}}</a></p>
+        <ng-template #notFoundEmail><strong>Nenhum email cadastrado</strong></ng-template>
+      </dd>
+
+      <dt class="col-sm-3">Observações</dt>
+      <dd class="col-sm-9">
+        <p *ngIf="data.obsEmpresa !== ''; else notFoundEmail">{{data.obsEmpresa}}</p>
+        <ng-template #notFoundEmail><strong>Nenhuma observação cadastrado!</strong></ng-template>
+      </dd>
+    </dl>
+  </mat-tab>
+</mat-tab-group>
+

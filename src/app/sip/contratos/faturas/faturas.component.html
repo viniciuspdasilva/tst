@@ -1,0 +1,50 @@
+<div class="spinner-container" *ngIf="data.load$ | async">
+  <mat-progress-bar></mat-progress-bar>
+</div>
+<div class="mat-elevation-z8 mat-table">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+  </mat-form-field>
+  <table mat-table [dataSource]="data">
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let res"> {{res.numNF}} </td>
+    </ng-container>
+    <ng-container matColumnDef="emissao">
+      <th mat-header-cell *matHeaderCellDef>Emissão</th>
+      <td mat-cell *matCellDef="let res"> {{res.dtEmicaoNF}} </td>
+    </ng-container>
+    <ng-container matColumnDef="recebimento">
+      <th mat-header-cell *matHeaderCellDef>Recebimento</th>
+      <td mat-cell *matCellDef="let res"> {{res.dtRecNF}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ano">
+      <th mat-header-cell *matHeaderCellDef>Ref. Ano</th>
+      <td mat-cell *matCellDef="let res"> {{res.anoRef}} </td>
+    </ng-container>
+    <ng-container matColumnDef="mes">
+      <th mat-header-cell *matHeaderCellDef>Ref. Mês</th>
+      <td mat-cell *matCellDef="let res"> {{res.mesRef}} </td>
+    </ng-container>
+    <ng-container matColumnDef="despesa">
+      <th mat-header-cell *matHeaderCellDef>Despesa</th>
+      <td mat-cell *matCellDef="let res"> {{res.tipoDesp}} </td>
+    </ng-container>
+    <ng-container matColumnDef="valor">
+      <th mat-header-cell *matHeaderCellDef>Valor</th>
+      <td mat-cell *matCellDef="let res"> {{res.vlrItem}} </td>
+    </ng-container>
+    <ng-container matColumnDef="observacoes">
+      <th mat-header-cell *matHeaderCellDef>Observações</th>
+      <td mat-cell *matCellDef="let res"> {{res.obsNF}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let res"><button mat-button>Atualizar</button></td>
+      <td mat-cell *matCellDef="let res"><button mat-button>Deletar</button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="table"></tr>
+    <tr mat-row  matRipple *matRowDef="let row; columns: table"></tr>
+  </table>
+  <mat-paginator [pageSize]="5" [length]="2204"  [pageSizeOptions]="[3, 5, 10, 25]" showFirstLastButtons></mat-paginator>
+</div>

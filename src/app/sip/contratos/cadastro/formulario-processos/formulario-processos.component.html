@@ -1,0 +1,63 @@
+<div class="example-container">
+  <form [formGroup]="processosForm" class="example-container">
+    <mat-horizontal-stepper [linear]="true" #cadastro>
+      <mat-step [stepControl]="processosForm">
+        <ng-template matStepLabel>Dados Principais</ng-template>
+        <div class="first-mat-form">
+          <mat-form-field>
+            <input type="number" matInput placeholder="Numero de processo" formControlName="numProcesso">
+            <mat-error *ngIf="processosForm.get('numProcesso').touched && processosForm.get('numProcesso').hasError('required')">
+              <mat-icon>error</mat-icon> - É necessario digitar o numero do processo!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="text" matInput placeholder="Objeto" formControlName="objProcesso">
+            <mat-error *ngIf="processosForm.get('objProcesso').touched && processosForm.get('objProcesso').hasError('required')">
+              <mat-icon>error</mat-icon> - É necessario digitar o numero do processo!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input type="number" id="nrLicitacao" matInput placeholder="Licitação" formControlName="nrLicitacao">
+            <mat-error *ngIf="processosForm.get('nrLicitacao').touched && processosForm.get('nrLicitacao').hasError('required')">
+              <mat-icon>error</mat-icon> - É necessario digitar o numero do processo!
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Licitação" formControlName="tipoLicitacao" [required]>
+              <mat-option>Selecione uma opção</mat-option>
+              <mat-option *ngFor="let option of tiposLicitacao" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Status" formControlName="statusProcesso" [required]>
+              <mat-option>Selecione uma opção</mat-option>
+              <mat-option *ngFor="let option of statusProcessos" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <textarea matInput placeholder="Observações relevantes" formControlName="obsProcesso"></textarea>
+          </mat-form-field>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Origem</strong></ng-template>
+        <table mat-table [dataSource]="origemUnidAdmDataSource">
+          <ng-container *ngFor="let option of columns" matColumnDef="{{option.value}}">
+            <th mat-header-cell *matHeaderCellDef>{{option.label}}</th>
+            <td mat-cell *matCellDef="let res"> {{res[option.value]}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columns.value"></tr>
+          <tr mat-row  *matRowDef="let row; columns: columns.value "></tr>
+        </table>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><strong>Verificar e Salvar</strong></ng-template>
+        <h1 class="display-1">Pagina em criação</h1>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</div>

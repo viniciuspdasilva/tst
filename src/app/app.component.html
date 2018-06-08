@@ -1,0 +1,26 @@
+{{logado}}
+<mat-toolbar color="primary" class="example-toolbar" *ngIf="logado">
+    <h1>SIP</h1>
+    <div class="align-content-end">
+
+    </div>
+</mat-toolbar>
+  <nav mat-tab-nav-bar *ngIf="logado">
+    <a mat-tab-link
+       *ngFor="let route of routes"
+       [routerLink]="route.router"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive"
+       [disabled]="!route.actived">
+      {{route.label}}
+    </a>
+  </nav>
+<mat-drawer-container>
+  <mat-drawer mode="side" opened class="mat-elevation-z8" *ngIf="logado">
+    <a routerLink="/link">Ser</a>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+

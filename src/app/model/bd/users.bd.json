@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nome": "Vinicius Pereira da Silva",
+      "cpf": "283.270.421-22",
+      "matricula": "E007078",
+      "password": "123456",
+      "roles": {
+        "grupo": 1,
+        "auth": 1,
+        "pages": 1
+      }
+    },
+    {
+      "id": 2,
+      "nome": "Ester Raimunda Santos",
+      "cpf": "788.107.951-72",
+      "matricula": "SE01152",
+      "password": "789456",
+      "roles": {
+        "grupo": 2,
+        "auth": 1,
+        "pages": 2
+      }
+    },
+    {
+      "id": 3,
+      "nome": "Carla Amanda Martins",
+      "cpf": "333.649.011-12",
+      "matricula": "SE01152",
+      "password": "789456",
+      "roles": {
+        "grupo": 2,
+        "auth": 1,
+        "pages": 2
+      }
+    }
+  ]
+}
