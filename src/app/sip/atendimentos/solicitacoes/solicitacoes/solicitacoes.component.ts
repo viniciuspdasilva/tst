@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart} from 'chart.js';
 import * as $ from 'jquery';
+import {PieChart} from '../../../../model/charts/pie-chart';
 
 @Component({
   selector: 'app-solicitacoes',
@@ -10,40 +11,31 @@ import * as $ from 'jquery';
 export class SolicitacoesComponent implements OnInit {
   public chart = [];
   public divs: JQuery;
-  pieChartData: any = {
-    chartType: 'PieChart',
-    dataTable: [
-      ['Department', 'Revenues', 'Another column'],
-      ['Shoes', 10700, 100],
-      ['Sports', 15400, 25],
-      ['Toys', 12500, 40],
-      ['Electronics', 2100, 889],
-      ['Food', 22600, 78],
-      ['Art', 1100, 42]
-    ],
-    formatters: [
-      {
-        columns: [1, 2],
-        type: 'NumberFormat',
-        options: {
-          prefix: '&euro;', negativeColor: '#FF0000', negativeParens: true
-        }
-      }
-    ],
-    options: {title: 'Countries', allowHtml: true}
-  };
+  data1: any[];
+  config1: PieChart;
+  id1: string;
+  data2: any[];
+  config2: PieChart;
+  id2: string;
   constructor() { }
 
   ngOnInit() {
-    this.divs = $('#chart_att_locais');
-  }
-
-  alert() {
-    console.log('igi');
-  }
-
-
-  login() {
-    alert('funcionou');
+    this.data1 = [['Task', 'Horas por dia'],
+      ['Eat',      3],
+      ['Commute',  2],
+      ['Watch TV', 5],
+      ['Video games', 4],
+      ['Sleep',    10]
+    ];
+   this.config1 = new PieChart('Test 1', 0.4);
+   this.id1 = 'pipe1';
+   this.data2 = [['Task', 'Hours per Day'],
+      ['Work',     11],
+      ['Eat',      2],
+      ['Commute',  2],
+      ['Watch TV', 2],
+      ['Sleep',    7]];
+    this.config2 = new PieChart('Test 2', 0.4);
+    this.id2 = 'pipe2';
   }
 }

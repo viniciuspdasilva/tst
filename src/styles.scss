@@ -6,6 +6,7 @@
   left: 0;
   right: 0;
   width: 100%;
+  padding: 10px;
   height: auto;
 }
 mat-drawer-container {
@@ -23,6 +24,11 @@ mat-drawer-content {
 table {
   width: 100%;
   height: 100%;
+}
+.example-toolbar {
+  width: 100%;
+  height: 100px;
+  padding: 20px;
 }
 *{
   margin: 0;

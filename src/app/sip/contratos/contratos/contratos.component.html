@@ -11,10 +11,9 @@
       <mat-divider></mat-divider>
       <app-fornecedor-detalhes [data]="detalhes"></app-fornecedor-detalhes>
     </div>
-    <div *ngSwitchDefault>
-      <h3 class="text-center">
-        Nenhum dado foi encontrado!
-      </h3>
+    <div *ngSwitchCase="1">
+      <h2>Garantia Acordada</h2>
+      <app-garantia-detalhes [data]="detalhes"></app-garantia-detalhes>
     </div>
   </div>
   <p-footer>
@@ -70,8 +69,8 @@
       </ng-container>
       <ng-container matColumnDef="garantia">
         <th mat-header-cell *matHeaderCellDef>Garantias</th>
-        <td mat-cell *matCellDef="let res" (click)="mostrarDetalhes(res, 1)">
-          <button mat-button>Mais detalhes</button>
+        <td mat-cell *matCellDef="let res">
+          <button mat-raised-button (click)="mostrarDetalhes(res, 1)">Mais detalhes</button>
         </td>
       </ng-container>
       <ng-container matColumnDef="gestores">

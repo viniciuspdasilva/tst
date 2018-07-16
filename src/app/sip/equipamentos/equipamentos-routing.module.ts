@@ -4,7 +4,7 @@ import {EquipamentosComponent} from './equipamentos/equipamentos.component';
 import {FormularioEquipamentosComponent} from './cadastro/formulario-equipamentos/formulario-equipamentos.component';
 
 const EQUIPAMENTOS_ROUTER: Routes = [
-  {path: '', component: EquipamentosComponent},
+  {path: 'equipamentos', component: EquipamentosComponent},
   {path: 'equipamentos/cadastro', component: FormularioEquipamentosComponent},
   {path: 'tipo', component: EquipamentosComponent},
   {path: 'modelo', component: EquipamentosComponent},

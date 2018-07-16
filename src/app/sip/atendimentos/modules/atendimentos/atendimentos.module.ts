@@ -46,6 +46,7 @@ import {CalendarModule} from 'angular-calendar';
 import {FormularioSolicitacoesComponent} from '../../cadastro/formulario-solicitacoes/formulario-solicitacoes.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ScheduleModule} from 'primeng/schedule';
+import {PieComponent} from '../../../../componentes/graficos/pie/pie.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -91,13 +92,15 @@ import {ScheduleModule} from 'primeng/schedule';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    ScheduleModule
+    ScheduleModule,
+    ChartsModule
   ],
   declarations: [
     InternosComponent,
     ExternosComponent,
     SolicitacoesComponent,
     FormularioSolicitacoesComponent,
+    PieComponent
   ],
   exports: [
     FormularioSolicitacoesComponent,

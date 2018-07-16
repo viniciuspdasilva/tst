@@ -69,6 +69,9 @@ import { LoginComponent } from './login/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {LoginService} from './login/login.service';
 import {AuthGuardService} from './login/guards/auth-guard.service';
+import {FornecedoresRoutingModule} from './sip/fornecedores/fornecedores.routing.module';
+import { PieComponent } from './componentes/graficos/pie/pie.component';
+import {ChartPieService} from './service/chart-pie.service';
 
 
 @NgModule({
@@ -90,6 +93,7 @@ import {AuthGuardService} from './login/guards/auth-guard.service';
     SolicitacoesRoutingModule,
     ContratosRoutingModule,
     EquipamentosRoutingModule,
+    FornecedoresRoutingModule,
     HttpClientModule,
     AtendimentosModule,
     EquipamentosModule,
@@ -150,7 +154,8 @@ import {AuthGuardService} from './login/guards/auth-guard.service';
     HttpSipService,
     LoginService,
     AuthGuardService,
-    GlobalErrorHandlerService
+    GlobalErrorHandlerService,
+    ChartPieService
   ],
   bootstrap: [AppComponent]
 })

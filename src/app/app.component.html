@@ -1,11 +1,57 @@
-{{logado}}
-<mat-toolbar color="primary" class="example-toolbar" *ngIf="logado">
-    <h1>SIP</h1>
-    <div class="align-content-end">
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <a class="navbar-brand" href="#">
+    <img [src]="link_imgs[0].src" width="195" height="44" style="margin: 15px" [alt]="link_imgs[0].label">
+  </a>
+  <a class="navbar-brand" routerLink="/">{{nameSystem}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
-    </div>
-</mat-toolbar>
-  <nav mat-tab-nav-bar *ngIf="logado">
+    <mat-menu #appMenu="matMenu" class="notification">
+      <div mat-menu-item class="notification-item">
+        <div class="notification-item-header">
+          <strong>
+            Contratos Vencido
+            <span class="notification-date">Hoje</span>
+          </strong>
+        </div>
+        <div class="notification-item-body">
+          <strong>Contratos vencidos...</strong>
+        </div>
+      </div>
+      <div mat-menu-item class="notification-item">
+        <div class="notification-item-header">
+          <strong>
+            Contratos Vencido
+            <span class="notification-date">Hoje</span>
+          </strong>
+        </div>
+        <div class="notification-item-body">
+
+        </div>
+      </div>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" style="margin: 10px; font-size: 22pt">
+      <img class="rounded img-thumbnail img-fluid" height="100" width="100" [src]="link_imgs[1].src" [alt]="link_imgs[1].label">
+    </button>
+    <mat-menu #appMenuNotification="matMenu" class="notification">
+      <div mat-menu-item class="notification-item" *ngFor="let not of messagens">
+        <div class="notification-item-header">
+          <strong>
+            {{not.titleMessage}}
+            <span class="notification-date">{{not.dateMessage}}</span>
+          </strong>
+        </div>
+      </div>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenuNotification" style="margin: 10px; font-size: 22pt">
+      <img class="rounded img-thumbnail img-fluid" height="100" width="100" [src]="link_imgs[2].src" [alt]="link_imgs[2].label">
+
+    </button>
+  </div>
+</nav>
+  <nav mat-tab-nav-bar>
     <a mat-tab-link
        *ngFor="let route of routes"
        [routerLink]="route.router"
@@ -16,10 +62,12 @@
     </a>
   </nav>
 <mat-drawer-container>
-  <mat-drawer mode="side" opened class="mat-elevation-z8" *ngIf="logado">
-    <a routerLink="/link">Ser</a>
+  <mat-drawer mode="side" opened>
+    <mat-list>
+      <mat-list-item *ngFor="let children of childrenRoutes"><a [routerLink]="children.url">{{children.label}}</a></mat-list-item>
+    </mat-list>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="example-container">
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
